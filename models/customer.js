@@ -35,8 +35,14 @@ var customerSchema = mongoose.Schema({
   },
   created_at: {
     type: Date,
-    default: date.now
-  },
+    default: Date.now
+  }
 });
 
-var Customer = module.exports = mongoose.model('Customer', customerSchema)
+var Customer = module.exports = mongoose.model('Customer', customerSchema);
+
+//Get Customer
+
+module.exports.getCustomers = function(callback, limit){
+  Customer.find(callback).limit(limit).sort([["first_name", 'ascending']]);
+}
