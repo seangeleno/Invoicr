@@ -1,9 +1,17 @@
 var express = require('express');
 var router = express.Router();
 
-//Get all invoices
+var Customer = require('../models/customer.js');
+var Invoice = require('../models/invoice.js');
+
+//Get all customers
 router.get('/', function(req, res){
-  res.send('/invoices route')
+  Invoice.getInvoices(function(err, invoices){
+    if(err){
+      res.send(err);
+    }
+    res.json(invoices)
+  })
 });
 
 module.exports = router;
